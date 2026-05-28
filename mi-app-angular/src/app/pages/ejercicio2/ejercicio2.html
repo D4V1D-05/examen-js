@@ -1,1 +1,46 @@
-<p>ejercicio2 works!</p>
+<div class="ejercicio-container">
+  <h2>Ejercicio 2: Calculadora de IMC</h2>
+  <p class="descripcion">Ingrese los datos personales y corporales para evaluar el estado nutricional correspondiente.</p>
+
+  <div class="layout-flex">
+    <form (ngSubmit)="enviarFormulario()" #formIMC="ngForm" class="form-rest">
+      <div class="campo">
+        <label>Nombre Completo</label>
+        <input type="text" [(ngModel)]="nombre" name="nombre" minlength="3" required placeholder="Mínimo 3 caracteres">
+      </div>
+
+      <div class="campo">
+        <label>Correo Electrónico</label>
+        <input type="email" [(ngModel)]="correo" name="correo" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required placeholder="ejemplo@correo.com">
+      </div>
+      
+      <div class="medidas-grid">
+        <div class="campo">
+          <label>Peso (kg)</label>
+          <input type="number" [(ngModel)]="peso" name="peso" min="10" max="300" required placeholder="10 - 300">
+        </div>
+        <div class="campo">
+          <label>Altura (m)</label>
+          <input type="number" [(ngModel)]="altura" name="altura" step="0.01" min="0.5" max="2.5" required placeholder="0.5 - 2.5">
+        </div>
+      </div>
+
+      <div class="acciones">
+        <button type="submit" [disabled]="!formIMC.form.valid">Calcular IMC</button>
+        <button type="button" class="btn-limpiar" (click)="limpiarFormulario()">Limpiar</button>
+      </div>
+    </form>
+
+    <div class="resultado-tarjeta" *ngIf="mostrarResultados">
+      <h3>Evaluación Nutricional</h3>
+      <div class="linea-resultado"><strong>Paciente:</strong> {{ nombre }}</div>
+      <div class="linea-resultado"><strong>Contacto:</strong> {{ correo }}</div>
+      <div class="linea-resultado"><strong>Masa Corporal:</strong> {{ peso }} kg / {{ altura }} m</div>
+      <div class="linea-resultado"><strong>Índice de Masa Corporal (IMC):</strong> {{ imc }}</div>
+      <div class="linea-resultado">
+        <strong>Categoría:</strong> 
+        <span class="obs-texto">{{ categoria }}</span>
+      </div>
+    </div>
+  </div>
+</div>

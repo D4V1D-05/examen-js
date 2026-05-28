@@ -1,1 +1,54 @@
-<p>ejercicio1 works!</p>
+<div class="ejercicio-container">
+  <h2>Ejercicio 1: Control de Calificaciones</h2>
+  <p class="descripcion">Ingrese el nombre del estudiante y sus cuatro notas.</p>
+
+  <div class="layout-flex">
+    <form (ngSubmit)="enviarFormulario()" #formEstudiante="ngForm" class="form-rest">
+      <div class="campo">
+        <label>Nombre del Estudiante</label>
+        <input type="text" [(ngModel)]="nombre" name="nombre" required placeholder="Ej. Juan Pérez">
+      </div>
+      
+      <div class="notas-grid">
+        <div class="campo">
+          <label>Nota 1 (N1)</label>
+          <input type="number" [(ngModel)]="N1" name="N1" min="0" max="20" required>
+        </div>
+        <div class="campo">
+          <label>Nota 2 (N2)</label>
+          <input type="number" [(ngModel)]="N2" name="N2" min="0" max="20" required>
+        </div>
+        <div class="campo">
+          <label>Nota 3 (N3)</label>
+          <input type="number" [(ngModel)]="N3" name="N3" min="0" max="20" required>
+        </div>
+        <div class="campo">
+          <label>Nota 4 (N4)</label>
+          <input type="number" [(ngModel)]="N4" name="N4" min="0" max="20" required>
+        </div>
+      </div>
+
+      <div class="acciones">
+        <button type="submit" [disabled]="!formEstudiante.form.valid">Calcular Notas</button>
+        <button type="button" class="btn-limpiar" (click)="limpiarFormulario()">Limpiar</button>
+      </div>
+    </form>
+
+    <div class="resultado-tarjeta" *ngIf="mostrarResultados">
+      <h3>Reporte Académico</h3>
+      <div class="linea-resultado"><strong>Estudiante:</strong> {{ nombre }}</div>
+      <div class="linea-resultado"><strong>Suma Total:</strong> {{ suma }}</div>
+      <div class="linea-resultado"><strong>Promedio Final:</strong> {{ promedio }}</div>
+      <div class="linea-resultado">
+        <strong>Estado:</strong> 
+        <span [class]="estadoAcademico === 'APROBADO' ? 'tag-aprobado' : 'tag-desaprobado'">
+          {{ estadoAcademico }}
+        </span>
+      </div>
+      <div class="linea-resultado">
+        <strong>Observación:</strong> 
+        <span class="obs-texto">{{ observacion }}</span>
+      </div>
+    </div>
+  </div>
+</div>
